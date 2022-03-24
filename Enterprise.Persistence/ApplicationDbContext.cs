@@ -16,5 +16,6 @@ namespace Enterprise.Persistence
         public DbSet<Employee> Employees { get; set; }
         public DbSet<PaymentRecord> PaymentRecords { get; set; }
         public DbSet<TaskYear> TaskYears { get; set; }
+
         }
 }
