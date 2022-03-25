@@ -11,6 +11,7 @@ namespace Enterprise_Application.Models
         public string EmployeeNo { get; set; }
         public string FullName { get; set; }
         public string Gender { get; set; }
+        public string Email { get; set; }
         public string ImageUrl { get; set; }
         public DateTime DateJoined { get; set; }
         public string Designation { get; set; }

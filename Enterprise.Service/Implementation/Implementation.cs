@@ -15,20 +15,17 @@ namespace Enterprise.Service.Implementation
         {
             _Context = context;
         }
-        public IEnumerable<Employee> GetAll()
-        {
-            return _Context.Employees.ToList();
-        }
+        public IEnumerable<Employee> GetAll() => _Context.Employees;
         public async Task CreateAsync(Employee Newemployee)
         {
             await _Context.Employees.AddAsync(Newemployee);
             await _Context.SaveChangesAsync();
         }
-        public Employee GetAsyncById(int EmployeeId)
-        {
-            var GetId = _Context.Employees.Where(c => c.Id == EmployeeId).FirstOrDefault();
-            return GetId;
-        }
+        public Employee GetAsyncById(int EmployeeId)=> _Context.Employees.Where(c => c.Id == EmployeeId).FirstOrDefault();
+        //{
+        //    var GetId = _Context.Employees.Where(c => c.Id == EmployeeId).FirstOrDefault();
+        //    return GetId;
+        //}
 
         public async Task UpdateAsync(Employee employee)
         {
