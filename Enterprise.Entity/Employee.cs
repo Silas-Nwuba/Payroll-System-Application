@@ -12,7 +12,6 @@ namespace Enterprise.Entity
         [Required]
         [MaxLength(100)]
         public string FirstName { get; set; }
-        [Required]
         [MaxLength(100)]
         public string MiddleName { get; set; }
         [Required]

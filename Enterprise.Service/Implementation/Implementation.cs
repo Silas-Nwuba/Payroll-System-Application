@@ -26,7 +26,13 @@ namespace Enterprise.Service.Implementation
         //    var GetId = _Context.Employees.Where(c => c.Id == EmployeeId).FirstOrDefault();
         //    return GetId;
         //}
+        public async Task UpdateAsyncByID(int employeeId)
+        {
+            var Update = _Context.Employees.Where(c => c.Id == employeeId).FirstOrDefault();
+            _Context.Employees.Update(Update);
+          await _Context.SaveChangesAsync();
 
+        }
         public async Task UpdateAsync(Employee employee)
         {
             _Context.Employees.Update(employee);
@@ -50,11 +56,7 @@ namespace Enterprise.Service.Implementation
         }
 
        
-        public Task UpdateAsyncByID(int employeeId)
-        {
-            throw new NotImplementedException();
-        }
-
+       
        
     }
 }

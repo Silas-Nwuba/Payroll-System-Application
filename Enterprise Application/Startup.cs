@@ -1,4 +1,6 @@
 
+using Enterprise.Service;
+using Enterprise.Service.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +36,8 @@ namespace Enterprise.Persistence
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            //added services of my Enterprise to the startup and it implementation
+            services.AddScoped<IEnterpriseService,Implementation>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

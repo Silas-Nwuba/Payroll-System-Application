@@ -11,9 +11,9 @@ namespace Enterprise_Application.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> _logger)
         {
             _logger = logger;
         }
