@@ -11,8 +11,10 @@ namespace Enterprise.Service
     {
         Task CreateAsync(PaymentRecord paymentRecord);
         PaymentRecord GetById(int id);
+        TaskYear GetTaxById(int id);
         IEnumerable<PaymentRecord> GetAll();
         IEnumerable<SelectListItem>GetAllTaxYear();
+        IEnumerable<SelectListItem> GetAllEmployeesPayRow();
         decimal OverTimeHours(decimal HourWorked, decimal ContratualHour);
         decimal OverTimeRate(decimal HourlyRate);
         decimal OverTimeEarnings(decimal OvertimeRate, decimal OverTimeHour);

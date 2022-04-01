@@ -245,18 +245,5 @@ namespace Enterprise_Application.Controllers
         }
 
     }
-
-
-
-
-    //   [HttpPost]
-    //   [ValidateAntiForgeryToken]
-    //   public async Task<IActionResult> Delete(EmployeeDeleteViewModel employeeDeleteViewModel)
-    //   {
-    //       await _enterpriseService.DeleteAsync(employeeDeleteViewModel.Id);
-    //        return RedirectToAction(nameof(Index));
-
-    //   }
-    //}
 }
 

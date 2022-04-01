@@ -38,6 +38,10 @@ namespace Enterprise.Persistence
             services.AddRazorPages();
             //added services of my Enterprise to the startup and it implementation
             services.AddScoped<IEnterpriseService,Implementation>();
+            services.AddScoped<IPayComputeService, PayComputeImplementation>();
+            services.AddScoped<ITaxComputation, TaxImplementation>();
+            services.AddScoped<INationalInsuranceComputation, NLCImplementation>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

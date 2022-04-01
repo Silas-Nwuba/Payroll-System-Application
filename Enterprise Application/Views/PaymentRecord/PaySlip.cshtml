@@ -1,0 +1,115 @@
+﻿@model PaymentDetailViewModel
+@{
+    ViewBag.title = "Pay Slip";
+    Layout = null;
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="card-body">
+            <div class="container-fluid d-flex justify-content-between flex-wrap">
+                <div class="col-md-3 pl-0">
+                   <img src="~/Image/Project pictures/Hicad (2).png"/><p style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">Hicad PayRoll System</p>
+                
+                    <p class="mt-5 mb-2"><b>Hicad System Ltd</b></p>
+                    <p>134 Ajao Estate off Airport Road<br />Lagos Nigeria</p>
+                </div>
+                <div class="col-md-3 pr-0">
+                    <p class="mt-5 mb-2 text-right">Pay Date:@Model.PayDate.ToString("dd/mm/yyyy")</p>
+                    <p class="text-right">Tax Code:@Model.TaskCode<br />Year: @Model.Year<br />HRMC</p>
+                </div>
+            </div>
+            <br /><br />
+            <div class="col-md-12 row">
+                <div class="col-md-8">Employee Name:@Model.FullName</div>
+                <div class="col-md-4">National Insurance Number:@Model.NiNo</div>
+
+            </div>
+            <br /><br />
+            <div class="row">
+                <div class="col-md-12 table-responsive-md">
+                    <table class="table table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>
+                                    Earnings
+                                </th>
+                                <th>
+                                    Hours
+                                </th>
+                                <th>
+                                    Rate
+                                </th>
+
+                                <th>
+                                    Amount
+                                </th>
+                                <th>
+                                    Deduction
+                                </th>
+                                <th>
+                                    Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Basic:</td>
+                                <td>@Model.ContratualHour.ToString("f")</td>
+                                <td>@Model.HourlyRate.ToString("f")</td>
+                                <td>@Model.ContratualEarning.ToString("C")</td>
+                                <td>Tax:</td>
+                                <td>@Model.Tax.ToString("f")</td>
+                            </tr>
+                            <tr>
+                                <td>OverTime:</td>
+                                <td>@Model.OvertimeHour.ToString("f")</td>
+                                <td>@Model.OverTimeRate.ToString("f")</td>
+                                <td>@Model.OvertimeEarning.ToString("C")</td>
+                                <td>SLC:</td>
+                                <td>@Model.SLc.Value.ToString("c")</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td> </td>
+                                <td>NLC:</td>
+                                <td>@Model.NLC.ToString("c")</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td> </td>
+                                <td>Union Fee:</td>
+                                <td>@Model.UnionFee.Value.ToString("f")</td>
+                            </tr>
+
+                            <tr>
+                                <td>Total:</td>
+                                <td>@Model.HourlyWorked</td>
+                                <td></td>
+                                <td>@Model.TotalEarning.ToString("c") </td>
+                                <td></td>
+                                <td>@Model.TotalDeduction.ToString("C")</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="table-dark"><b>Net Pay</b></td>
+                                <td class="table-dark"><b>@Model.NetPayment.ToString("C")</b></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

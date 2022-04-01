@@ -11,6 +11,9 @@ namespace Enterprise.Service.Implementation
     public class Implementation : IEnterpriseService
     {
         private readonly ApplicationDbContext _Context;
+        private decimal StudentLoan;
+        private decimal Fee;
+
         public Implementation(ApplicationDbContext context)
         {
             _Context = context;
@@ -47,16 +50,42 @@ namespace Enterprise.Service.Implementation
         }
         public decimal StudentLoanRefundPayment(int id, decimal TotalAmount)
         {
-            throw new NotImplementedException();
+            var Employee = GetAsyncById(id);
+            if (Employee.StudentLoanPayment == StudentLoanPayment.Yes && TotalAmount > 1750 && TotalAmount < 2000)
+            {
+                StudentLoan = .15m;
+            }
+            else if(Employee.StudentLoanPayment == StudentLoanPayment.Yes && TotalAmount >= 2000 & TotalAmount > 2250)
+            {
+                StudentLoan = .38m;
+            }
+            else if(Employee.StudentLoanPayment == StudentLoanPayment.Yes && TotalAmount >=2250 && TotalAmount > 2500)
+            {
+                StudentLoan = .60m;
+            }
+            else if (Employee.StudentLoanPayment == StudentLoanPayment.Yes && TotalAmount >= 2250)
+            {
+                StudentLoan = .83m;
+            }
+            else
+            {
+                StudentLoan = .0m;
+            }
+            return StudentLoan;
         }
 
         public decimal UnionFee(int id)
         {
-            throw new NotImplementedException();
+            var Employee = GetAsyncById(id);
+            if(Employee.UnionMember == UnionMember.Yes)
+            {
+                Fee = .10m;
+            }
+            else
+            {
+                Fee = .0m;
+            }
+            return Fee;
         }
-
-       
-       
-       
     }
 }

@@ -13,7 +13,7 @@ namespace Enterprise.Entity
         public string FullName { get; set; }
         public string NiNo { get; set; }
         public DateTime PaymentDay { get; set; }
-        public DateTime PaymentMonth { get; set; }
+        public DateTime PaymentMonth { get; set; } 
         public TaskYear TaskYear { get; set; }
 
         [ForeignKey("TaskYearId")]

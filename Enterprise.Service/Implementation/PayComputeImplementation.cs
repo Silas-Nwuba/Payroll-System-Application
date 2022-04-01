@@ -74,5 +74,18 @@ namespace Enterprise.Service.Implementation
         => OverTimeEarning + ContratualEarning;
         public decimal Netpay(decimal TotalEarning, decimal TotalDeduction)
         => TotalEarning - TotalDeduction;
+
+        public TaskYear GetTaxById(int id) => _Context.TaskYears.Where(task => task.Id == id).FirstOrDefault();
+
+        public IEnumerable<SelectListItem> GetAllEmployeesPayRow()
+        {
+            var GetEmployee = _Context.Employees.Select(emp => new SelectListItem
+            {
+                Text = emp.FullName,
+                Value = emp.Id.ToString(),
+            });
+            return GetEmployee;
+        }
     }
+    
 }

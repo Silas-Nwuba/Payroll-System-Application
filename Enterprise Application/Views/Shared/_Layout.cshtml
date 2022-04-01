@@ -27,23 +27,23 @@
                     <br />
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#Employee" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="fa-solid fa-users fa-lg text-primary"></i>
+                            <i class="fas fa-user text-primary"></i>
                             <span class="nav-link"style="position:relative;right:20px">Employee</span>
                         </a>
                         <div class="collapse" id="Employee">
                             <a class="nav-link" asp-area="" asp-action="Index" asp-controller="Employee">All Employee</a>
-                            <a class="nav-link" asp-area="" asp-action="Index" asp-controller="Employee">New Employee</a>
+                            <a class="nav-link" asp-area="" asp-action="create" asp-controller="Employee">New Employee</a>
 
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#Paycompute" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="fa-solid fa-users fa-lg text-primary"></i>
+                            <i class="fas fa-pound-sign text-primary"></i>
                             <span class="nav-link" style="position:relative;right:20px">Payment</span>
                         </a>
                         <div class="collapse" id="Paycompute">
-                            <a class="nav-link" asp-area="" asp-action="Index" asp-controller="Employee">New Pay</a>
-                            <a class="nav-link" asp-area="" asp-action="Index" asp-controller="Employee">Payment Record</a>
+                            <a class="nav-link" asp-area="" asp-action="Create" asp-controller="PaymentRecord">New Pay</a>
+                            <a class="nav-link" asp-area="" asp-action="Index" asp-controller="PaymentRecord">Payment Record</a>
 
                         </div>
                     </li>
