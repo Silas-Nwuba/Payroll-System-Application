@@ -65,7 +65,7 @@
                                             <td>@item.Net.ToString("c")</td>
                                             <td>
                                                 <a class="text-primary" asp-action="Payslip" asp-controller="PaymentRecord" asp-route-id="@item.Id">Preview Payslip</a>
-                                                <a class="text-info " asp-action="Details" asp-controller="Employee" asp-route-id="@item.Id">Print </a>
+                                                <a class="text-info " asp-action="Print" asp-controller="PaymentRecord" asp-route-id="@item.Id"><i class="fas fa-file-pdf"><l style="margin-left:7px">Pdf</l></i></a>
 
                                             </td>
                                         </tr>

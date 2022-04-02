@@ -21,7 +21,7 @@ namespace Enterprise_Application.Controllers
             _hostingWebRoot = hostingEnvironment;
         }
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int? PageNumber)
         {
             var Employee = _enterpriseService.GetAll().Select(employee => new EmployeeIndexViewModel()
             {
@@ -35,7 +35,8 @@ namespace Enterprise_Application.Controllers
                 City = employee.City,
                 Designation = employee.Designation,
             }).ToList();
-            return View(Employee);
+            int PageSize = 6;
+            return View(EmployeeListPagination<EmployeeIndexViewModel>.Create(Employee, PageNumber ?? 1, PageSize));
         }
         [HttpGet] //it will us to view the employee form
         ////[Obsolete]
@@ -206,6 +207,7 @@ namespace Enterprise_Application.Controllers
                 Email = EmpDetails.Email,
                 DateJoined = EmpDetails.DateJoined,
                 Designation = EmpDetails.Designation,
+                Gender = EmpDetails.Gender,
                 DoB = EmpDetails.DoB,
                 City = EmpDetails.City,
                 Address = EmpDetails.Address,

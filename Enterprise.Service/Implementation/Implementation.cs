@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Enterprise.Persistence;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Enterprise.Service.Implementation
 {
@@ -18,7 +19,7 @@ namespace Enterprise.Service.Implementation
         {
             _Context = context;
         }
-        public IEnumerable<Employee> GetAll() => _Context.Employees;
+        public IEnumerable<Employee> GetAll() => _Context.Employees.AsNoTracking().OrderBy(emp=> emp.FullName);
         public async Task CreateAsync(Employee Newemployee)
         {
             await _Context.Employees.AddAsync(Newemployee);

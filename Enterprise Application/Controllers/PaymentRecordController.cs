@@ -2,6 +2,7 @@
 using Enterprise.Service;
 using Enterprise_Application.Models;
 using Microsoft.AspNetCore.Mvc;
+using RotativaCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -174,6 +175,15 @@ namespace Enterprise_Application.Controllers
 
             };
             return View(DetailView);
+        }
+        public  IActionResult Print(int id)
+        {
+            var PrintPdf = new ActionAsPdf("PaySlip", new { Id = id })
+            {
+                FileName = "PaySlip.pdf",
+
+            };
+            return PrintPdf;
         }
       
        

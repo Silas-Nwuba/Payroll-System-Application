@@ -12,7 +12,7 @@ namespace Enterprise_Application.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage ="Employee Number field is required"),Display(Name ="Employee Number")]
-        [RegularExpression(@"^[A-Z]{3,3}[0-6]{3}$",ErrorMessage ="the first three characters must be Uppercase and 3 digit")]
+        [RegularExpression(@"^[A-Z]{3,3}[0-9]{3}$",ErrorMessage ="the first three characters must be Uppercase and 3 digit and 6 Number")]
         public string EmployeeNo { get; set; }
         [Required(ErrorMessage = "first Name is required"), StringLength(100), Display(Name = "First Name")]
         [MaxLength(50)]

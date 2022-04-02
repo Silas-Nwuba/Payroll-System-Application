@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EmployeeIndexViewModel>
+﻿@model EmployeeListPagination<EmployeeIndexViewModel>
 <div class="container">
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
@@ -43,7 +43,7 @@
                                         <td>
                                             City
                                         </td>
-                                        <td class="text-warning"style="width:130px">
+                                        <td class="text-warning" style="width:130px">
                                             Action
                                         </td>
                                     </tr>
@@ -66,14 +66,25 @@
                                                 <a class="text-danger" asp-action="Delete" asp-controller="Employee" asp-route-id="@item.Id">Delete</a>
                                             </td>
                                         </tr>
-                                     }
+                                    }
                                 </tbody>
                             </table>
-
+                            @{
+                                var DisablePrevious = !Model.IsPreviousPageAvailabe ? "disabled" : "";
+                                var DisableNext = !Model.IsNextPageAvailabe ? "disabled" : "";
+                            }<br />
+                            <br />
+                            <br />
+                            <a asp-action="Index" asp-route-PageNumber="@(Model.PageIndex - 1)" class="btn btn-primary @DisablePrevious">
+                                Previous
+                            </a>
+                            <a asp-action="Index" asp-route-PageNumber="@(Model.PageIndex + 1)" class="btn btn-primary @DisableNext">
+                                Next
+                            </a>
                         </div>
                     </div>
                     <br />
-                    <br /><br />
+                    <br /><br /><br /><br />
                 </div>
             </div>
         </div>
