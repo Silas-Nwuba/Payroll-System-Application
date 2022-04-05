@@ -1,6 +1,7 @@
 ﻿using Enterprise.Entity;
 using Enterprise.Service;
 using Enterprise_Application.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RotativaCore;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Enterprise_Application.Controllers
 {
+    [Authorize(Roles = "Admin , Manager")]
     public class PaymentRecordController : Controller
     {
         private readonly IPayComputeService _paymentRecord;
@@ -38,7 +40,7 @@ namespace Enterprise_Application.Controllers
             _taxComputation1 = taxComputation;
             
         }
-        public IActionResult Index()
+        public IActionResult Index(int? PageNumber)
         {
             var PayMent = _paymentRecord.GetAll().Select(Pay => new PaymentRecordIndexViewModel
             {
@@ -54,21 +56,22 @@ namespace Enterprise_Application.Controllers
                 Employee = Pay.Employee,
                 Net = Pay.TotalEarning,
             }).ToList();
-
-            return View(PayMent);
+            int PageSize = 5;
+            return View(PaymentRecordListPagination<PaymentRecordIndexViewModel>.Create(PayMent, PageSize ,PageNumber??1));
         }
         [HttpGet]
+     [Authorize(Roles ="Admin")]
         public IActionResult Create()
         {
           ViewBag.EmployeeId = _paymentRecord.GetAllEmployeesPayRow();
           ViewBag.TaxYearId = _paymentRecord.GetAllTaxYear(); 
-            var CreateView = new PaymentRecordCreateViewModel();
-            return View(CreateView);
-
+          var CreateView = new PaymentRecordCreateViewModel();
+          return View(CreateView);
         }
        
         [ValidateAntiForgeryToken]
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult>Create(PaymentRecordCreateViewModel paymentRecord)
         {
             if (ModelState.IsValid)
@@ -140,6 +143,7 @@ namespace Enterprise_Application.Controllers
             return View(DetailView);
         }
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult PaySlip(int id)
         {
             var paymentRecord = _paymentRecord.GetById(id);

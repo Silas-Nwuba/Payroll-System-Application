@@ -1,6 +1,7 @@
 ﻿using Enterprise.Entity;
 using Enterprise.Persistence;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Enterprise.Service.Implementation
             await _Context.PaymentRecords.AddAsync(paymentRecord);
             await _Context.SaveChangesAsync();
         }
-        public IEnumerable<PaymentRecord> GetAll() => _Context.PaymentRecords.OrderBy(p => p.EmployeeId);
+        public IEnumerable<PaymentRecord> GetAll() => _Context.PaymentRecords.AsNoTracking().OrderBy(p => p.EmployeeId);
 
         public PaymentRecord GetById(int id) => _Context.PaymentRecords.Where(c => c.Id == id).FirstOrDefault();
 

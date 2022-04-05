@@ -32,20 +32,43 @@ namespace Enterprise.Persistence
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddDefaultUI()
+            .AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                //Confiqure Default Password by Chukwuebuka
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequiredLength = 6;
+
+                // configuree Default lockout by chukwuebuka
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                options.Lockout.MaxFailedAccessAttempts = 6;
+
+                //options.SignIn.RequireConfirmedEmail = true;
+
+            });
+
+             
             services.AddControllersWithViews();
             services.AddRazorPages();
-            //added services of my Enterprise to the startup and it implementation
-            services.AddScoped<IEnterpriseService,Implementation>();
+            //added services of my Enterprise to the startup and it implementation chukwuebuka
+            services.AddScoped<IEnterpriseService, Implementation>();
             services.AddScoped<IPayComputeService, PayComputeImplementation>();
             services.AddScoped<ITaxComputation, TaxImplementation>();
             services.AddScoped<INationalInsuranceComputation, NLCImplementation>();
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        //i added usermanager and rolemanager to startup 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -64,6 +87,8 @@ namespace Enterprise.Persistence
             app.UseRouting();
 
             app.UseAuthentication();
+           // intializing our usermanager and rolemanager chukwuebuka
+            DataSeeding.UserAndRoleAsync(userManager, roleManager).Wait();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

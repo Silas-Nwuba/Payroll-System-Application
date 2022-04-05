@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using Enterprise.Entity;
 using Enterprise.Service;
 using Enterprise_Application.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Enterprise_Application.Controllers
 {
+    //i want the admin amd the manager to get access to this
+    [Authorize(Roles = "Admin,Manager")]
     public class EmployeeController : Controller
     {
         private readonly IEnterpriseService _enterpriseService;
@@ -35,11 +38,12 @@ namespace Enterprise_Application.Controllers
                 City = employee.City,
                 Designation = employee.Designation,
             }).ToList();
-            int PageSize = 6;
+            int PageSize = 5;
             return View(EmployeeListPagination<EmployeeIndexViewModel>.Create(Employee, PageNumber ?? 1, PageSize));
         }
         [HttpGet] //it will us to view the employee form
         ////[Obsolete]
+    
         public IActionResult Create()
         {
             var ViewModel = new EmployeeCreateViewModel();
@@ -48,6 +52,7 @@ namespace Enterprise_Application.Controllers
 
         [ValidateAntiForgeryToken] // provide cross-site-foreigy token                          
         [HttpPost]
+ 
         public async Task<IActionResult> Create(EmployeeCreateViewModel employeeCreateView)
         {
             try
